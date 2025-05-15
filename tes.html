@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainrot Pokémon Battle</title>
+    <style>
+        body {
+            display: flex;
+            background-color: gray;
+            justify-content: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        #kotak {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+        }
+        .kotak-img {
+            width: 200px;
+            background-color: aqua;
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .gambar img {
+            width: 100%;
+            object-fit:cover;
+            border-radius: 10px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div><h1>Brainrot Pokémon Battle</h1></div>
+        <div id="subjudul"><h2>Select Your Character</h2></div>
+        <div id="kotak">
+            <div class="kotak-img" onclick="start('img/tung.webp')">
+                <div class="gambar">
+                    <img src="img/tung.webp">
+                </div>
+                <h2>Tung Tung Tung Tung Sahur</h2>
+            </div>
+            <div class="kotak-img" onclick="start('img/pokemon1.webp')">
+                <div class="gambar">
+                    <img src="img/tralalero.jpeg">
+                </div>
+                <h2>Tralalero Tralala</h2>
+            </div>
+            <div class="kotak-img" onclick="start('img/pokemon2.webp')">
+                <div class="gambar">
+                    <img src="img/cappuccino.jpeg">
+                </div>
+                <h2>Cappucino Assassino</h2>
+            </div>
+            <div class="kotak-img" onclick="start('img/pokemon3.webp')">
+                <div class="gambar">
+                    <img src="img/bombardilo.jpeg">
+                </div>
+                <h2>Bombardilo Crocodilo</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function start(selectedImage) {
+            alert("Karakter dipilih: " + selectedImage);
+            // Lanjutkan ke halaman battle atau tampilkan karakter di layar berikutnya
+        }
+    </script>
+</body>
+</html>

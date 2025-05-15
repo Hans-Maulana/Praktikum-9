@@ -117,31 +117,36 @@
                 stat_comp[0] -= damage
                 document.getElementById("musuh").innerHTML = "Opponent HP: " + stat_comp[0]
                 document.getElementById("history").innerHTML += "You used a " + attack[2] + " You dealt " + damage + " damage."
-            }
+            }  
+
             
+
             // Giliran Bot
-            pukul = Math.floor(Math.random()*3);
-            if(pukul == 0){
+            if(stat_comp[0] > 0){
+                pukul = Math.floor(Math.random()*3);
+                if(pukul == 0){
                 damage = Math.floor(Math.random() * 6) + 5;
                 damage += stat_comp[1]
                 stat_user[0] -= damage
                 document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
-                document.getElementById("history").innerHTML += "<p> You used a " + attack[0] + " You dealt " + damage + " damage.</p>"
+                document.getElementById("history").innerHTML += "<p> Opponent attack back with a " + attack[0] + " You took " + damage + " damage.</p>"
+                }
+                else if(pukul == 1){
+                    damage = Math.floor(Math.random() * 5) + 11;
+                    damage += stat_comp[1]
+                    stat_user[0] -= damage
+                    document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
+                    document.getElementById("history").innerHTML += "<p> Opponent attack back with a " + attack[1] + " You took " + damage + " damage.</p>"
+                }
+                else if(pukul == 2){
+                    damage = Math.floor(Math.random() * 5) + 16;
+                    damage += stat_comp[1]
+                    stat_user[0] -= damage
+                    document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
+                    document.getElementById("history").innerHTML += "<p> Opponent attack back with a " + attack[2] + " You took " + damage + " damage.</p>"
+                }
             }
-            else if(pukul == 1){
-                damage = Math.floor(Math.random() * 5) + 11;
-                damage += stat_comp[1]
-                stat_user[0] -= damage
-                document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
-                document.getElementById("history").innerHTML += "<p> You used a " + attack[1] + " You dealt " + damage + " damage.</p>"
-            }
-            else if(pukul == 2){
-                damage = Math.floor(Math.random() * 5) + 16;
-                damage += stat_comp[1]
-                stat_user[0] -= damage
-                document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
-                document.getElementById("history").innerHTML += "<p> You used a " + attack[2] + " You dealt " + damage + " damage.</p>"
-            }
+            
 
             // Check pemenang
             if (stat_user[0] <= 0){
