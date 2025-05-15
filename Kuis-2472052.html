@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body{
+                background-color: pink;
+            }
+        </style>
+    </head>
+    <body>
+        <p>1. Who invented the World Wide Web?</p>
+        <p>a. Alan Turning</p>
+        <p>b. Tims Berners-Lee</p>
+        <p>c. Nicki Minaj</p>
+        <p>d. Charles Babbage</p>
+        <input type="text" value="" id="jawaban1"> <input id="jawab1" type="button" value="submit" onclick="cekjawaban1()">
+        <p id="hasil1"></p>
+        <p id="retry1"></p>
+        
+        <p>2. Which in the following apps here is not a web browser?</p>
+        <p>a. Google Chrome</p>
+        <p>b. Safari</p>
+        <p>c. Vuze</p>
+        <p>d. Opera</p>
+        <input type="text" value="" id="jawaban2"> <input id="jawab1" type="button" value="submit" onclick="cekjawaban2()">
+        <p id="hasil2"></p>
+        <p id="retry2"></p>
+        <script>
+            function cekjawaban1(){
+                let jawaban = document.getElementById("jawaban1").value;
+                let hasil = document.getElementById("hasil1");
+                let retry = document.getElementById("retry1");
+                if (jawaban == "b"){
+                    hasil.style.color = "green"
+                    hasil.innerHTML = "jawaban benar"
+                    retry.innerHTML= ""
+                }
+                else{
+                    hasil.style.color = "red"
+                    hasil.innerHTML = "jawaban salah"
+                    retry.innerHTML = '<a href="Kuis-2472052.html"><input type="submit" value="retry"></a>'
+                }
+            }
+            function cekjawaban2(){
+                let jawaban = document.getElementById("jawaban2").value;
+                let hasil = document.getElementById("hasil2");
+                let retry = document.getElementById("retry2");
+                if (jawaban == "c"){
+                    hasil.style.color = "green"
+                    hasil.innerHTML = "jawaban benar"
+                    retry.innerHTML= ""
+                }
+                else{
+                    hasil.style.color = "red"
+                    hasil.innerHTML = "jawaban salah"
+                    retry.innerHTML = '<a href="Kuis-2472052.html"><input type="submit" value="retry"></a>'
+                }
+            }
+        </script>
+    </body>
+</html>

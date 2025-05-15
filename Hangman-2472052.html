@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: lightblue; 
+            font: Arial; 
+        }
+        .container{
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            height: 500px;  
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        } 
+        #jawaban{
+            width: 15px;
+        }
+        .soal{
+            margin-right: 10px;
+            width: 500px;
+            text-align: center;
+        }
+        .gambar{
+            margin-left: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gambar">
+            <img id="image" src="">
+            <h3 id="nyawa">Lives : </h3>
+        </div>
+        <div class="soal">
+            <h1 id="answer"></h1>
+            <p id="clue"></p>
+            <div id="kotak"><input id="jawaban" type="text" value=""  maxlength="1"> <button onclick="checkanswer()">Check</button></div>
+            
+        </div>
+    </div>
+    <script>
+        let live = 10;
+        let soal = ["_ _ _ _ _ _", "_ _ _ _ _ _ _ _ _ _", "_ _ _ _ _ _ _ _", "_ _ _ _ _", "_ _ _ _ _ _ _"];
+        let jawaban = ["PYTHON", "JAVASCRIPT", "TAILWIND", "REACT", "LARAVEL"];
+        let clues = [
+            "A versatile programming language named after a snake, loved for its simplicity.",
+            "The language that brings interactivity to websites, often abbreviated as JS.",
+            "A utility-first CSS framework for rapidly building custom designs.",
+            "A JavaScript library for building dynamic user interfaces, created by Facebook.",
+            "A PHP framework known for elegant syntax and robust web development tools.",
+        ];
+
+        let currentAnswer = [];
+        let selectedWord = "";
+
+        function generate() {
+            let angka = Math.floor(Math.random() * 5);
+            selectedWord = jawaban[angka];
+            currentAnswer = Array(selectedWord.length).fill("_");
+            document.getElementById("answer").innerHTML = currentAnswer.join(" ");
+            document.getElementById("clue").innerHTML = clues[angka];
+            document.getElementById("image").src = "img/" + live + ".jpg";
+            document.getElementById("nyawa").innerHTML = "Lives : " + live;
+        }
+
+      
+        function checkanswer() {
+            let input = document.getElementById("jawaban").value.toUpperCase();
+            let found = false;
+
+            for (let i = 0; i < selectedWord.length; i++) {
+                if (selectedWord[i] === input && currentAnswer[i] === "_") {
+                    currentAnswer[i] = input;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                live--;
+            }
+
+            document.getElementById("answer").innerHTML = currentAnswer.join(" ");
+            document.getElementById("nyawa").innerHTML = "Lives : " + live;
+            document.getElementById("image").src = "img/" + live + ".jpg";
+            document.getElementById("jawaban").value = "";
+
+            if (currentAnswer.join("") === selectedWord) {
+               document.getElementById("kotak").innerHTML = '<h3 style="color:green;" >Kamu Menang!</h3>'
+             
+               
+            } else if (live <= 0) {
+                document.getElementById("kotak").innerHTML = '<h3 style="color:red;" >Kamu Kalah!</h3>'
+                   
+            }
+           
+        }
+
+        window.onload = generate;
+
+    </script>
+</body>
+</html>

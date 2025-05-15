@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainrot Pokémon Battle</title>
+    <style>
+        body {
+            display: flex;
+            background-color: gray;
+            justify-content: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        #kotak {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+        }
+        .kotak-img {
+            width: 200px;
+            background-color: rgb(206, 206, 206);
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .gambar img {
+            width: 100%;
+            object-fit:cover;
+            border-radius: 10px;
+            height: 200px;
+        }
+        .kotak-battle {
+            width: 500px;
+            background-color: rgb(206, 206, 206);
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .kotak-battle img {
+            width: 100%;
+            object-fit:cover;
+            border-radius: 10px;
+            height: 500px;
+        }
+        .tombol{
+            background-color: rgb(89, 197, 39);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div><h1>Brainrot Pokémon Battle</h1></div>
+        <div><h2 id="subjudul">Select Your Character</h2></div>
+        <div id="kotak"></div>
+        <br>
+        <div id="serang"></div>
+        <div id="history"></div>
+    </div>
+
+    <script>
+        let gambar = ["img/tung.webp","img/tralalero.jpeg", "img/cappuccino.jpeg","img/bombardilo.jpeg"];
+        let hero = ["Tung Tung Tung Tung Sahur", "Tralalero Tralala","Cappuncinno Assassino", "Bombardilo Crocodilo"];
+        let stat = [97,95,90,100,13,15,20,10];
+        let stat_user = [0,0]
+        let stat_comp = [0,0]
+       function start(element) {
+            document.getElementById("subjudul").innerHTML ="Battle Start!";
+            document.getElementById("serang").innerHTML ='<button class="tombol" onclick="serang()">Attack!</button>';
+            document.getElementById("kotak").innerHTML ="";
+
+            let i_player = parseInt(element.getAttribute('data-value'));  // konversi ke number
+            let i_comp = Math.floor(Math.random()*4);
+
+            while(i_comp == i_player){
+                i_comp = Math.floor(Math.random()*4);
+            }
+
+            document.getElementById("kotak").innerHTML += '<div class="kotak-battle" ><div class="gambar"><img src=' + gambar[i_player] + '></div><p>Your Character: ' + hero[i_player] + '</p><p id="pemain">Your HP: '+ stat[i_player] + '</p></div>';
+            document.getElementById("kotak").innerHTML += '<div class="kotak-battle" data-value="'+ i_comp + '"><div class="gambar"><img src=' + gambar[i_comp] + '></div><p>Opponent: ' + hero[i_comp] + '</p><p id="musuh">Opponent HP: '+ stat[i_comp] + '</p></div>';
+
+            stat_user = [stat[i_player], stat[i_player + 4]];
+            stat_comp = [stat[i_comp], stat[i_comp + 4]];
+        }
+        
+        function serang(){
+            document.getElementById("history").innerHTML = ""
+            let attack = ["Light Attack!","Medium Attack!","Heavy Attack!"];
+            
+            // Pemain Menyerang
+            let pukul = Math.floor(Math.random()*3);
+            if(pukul == 0){
+                let damage = Math.floor(Math.random() * 6) + 5;
+                damage += stat_user[1]
+                stat_comp[0] -= damage
+                document.getElementById("musuh").innerHTML = "Opponent HP: " + stat_comp[0]
+                document.getElementById("history").innerHTML += "You used a " + attack[0] + " You dealt " + damage + " damage."
+            }
+            else if(pukul == 1){
+                damage = Math.floor(Math.random() * 5) + 11;
+                damage += stat_user[1]
+                stat_comp[0] -= damage
+                document.getElementById("musuh").innerHTML = "Opponent HP: " + stat_comp[0]
+                document.getElementById("history").innerHTML += "You used a " + attack[1] + " You dealt " + damage + " damage."
+            }
+            else if(pukul == 2){
+                damage = Math.floor(Math.random() * 5) + 16;
+                damage += stat_user[1]
+                stat_comp[0] -= damage
+                document.getElementById("musuh").innerHTML = "Opponent HP: " + stat_comp[0]
+                document.getElementById("history").innerHTML += "You used a " + attack[2] + " You dealt " + damage + " damage."
+            }
+            
+            // Giliran Bot
+            pukul = Math.floor(Math.random()*3);
+            if(pukul == 0){
+                damage = Math.floor(Math.random() * 6) + 5;
+                damage += stat_comp[1]
+                stat_user[0] -= damage
+                document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
+                document.getElementById("history").innerHTML += "<p> You used a " + attack[0] + " You dealt " + damage + " damage.</p>"
+            }
+            else if(pukul == 1){
+                damage = Math.floor(Math.random() * 5) + 11;
+                damage += stat_comp[1]
+                stat_user[0] -= damage
+                document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
+                document.getElementById("history").innerHTML += "<p> You used a " + attack[1] + " You dealt " + damage + " damage.</p>"
+            }
+            else if(pukul == 2){
+                damage = Math.floor(Math.random() * 5) + 16;
+                damage += stat_comp[1]
+                stat_user[0] -= damage
+                document.getElementById("pemain").innerHTML = "Your HP: " + stat_user[0]
+                document.getElementById("history").innerHTML += "<p> You used a " + attack[2] + " You dealt " + damage + " damage.</p>"
+            }
+
+            // Check pemenang
+            if (stat_user[0] <= 0){
+                document.getElementById("pemain").innerHTML = "Your HP: " + 0
+                document.getElementById("serang").innerHTML ='';
+                document.getElementById("history").innerHTML += '<h2 style="color:green;">Opponent Win!</h2>'
+            }
+            else if(stat_comp[0] <= 0){
+                document.getElementById("musuh").innerHTML = "Your HP: " + 0
+                document.getElementById("serang").innerHTML ='';
+                document.getElementById("history").innerHTML += '<h2 style="color:green;">You Win!</h2>'
+            }
+            else if (stat_comp[0] <= 0 && stat_user[0] <= 0){
+                document.getElementById("pemain").innerHTML = "Your HP: " + 0
+                document.getElementById("musuh").innerHTML = "Opponent HP: " + 0
+                document.getElementById("serang").innerHTML ='';
+                document.getElementById("history").innerHTML += '<h2 style="color:green;">Draw!</h2>'
+            }
+
+
+        }
+        function generate(){
+            for(let i = 0; i<=3 ;i++){
+                document.getElementById("kotak").innerHTML += '<div class="kotak-img" role="button" onclick="start(this)"  data-value="'+ i + '"><div class="gambar"><img src=' + gambar[i] + '></div><h2>' + hero[i] + '</h2><p>HP: '+ stat[i] + ' | Attack: ' + stat[i+4] + '</p></div>'
+            };
+        }
+        window.onload = generate();
+    </script>
+</body>
+</html>
